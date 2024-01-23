@@ -27,7 +27,7 @@
     <input type="text" name="alamat" class="form-control" id="alamat"  value="{{ old('alamat',$student->alamat) }}">
   </div>
 
-<button type="submit" class="btn btn-primary">Add</button>
+<button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
 

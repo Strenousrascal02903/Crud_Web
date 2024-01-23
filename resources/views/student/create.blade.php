@@ -16,7 +16,11 @@
   </div>
   <div class="mb-3">
     <label for="kelas" class a="form-label">Kelas</label>
-    <input type="text" name="kelas" class="form-control" id="kelas" value="{{ old('kelas') }}" >
+    <select  name="kelas_id" class="form-control"  >
+      @foreach ($kelas as $grade)
+      <option name="kelas_id" value="{{ $grade->id }}">{{$grade->nama}}</option>
+      @endforeach
+    </select>
   </div>
   <div class="mb-3">
     <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>

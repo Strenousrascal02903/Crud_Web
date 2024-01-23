@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -28,6 +29,7 @@ class StudentController extends Controller
     {
         return view('student.create', [
             "tittle" => "create-new-data",
+            "kelas" =>Kelas::all()
             
         ]);
     }
