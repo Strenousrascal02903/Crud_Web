@@ -38,7 +38,7 @@ class StudentController extends Controller
         $validateData = $request->validate([
             'nis' => 'required|max:255',
             'nama' => 'required',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
             'alamat' => 'required',
             'tgl_lahir' => 'required',
         ]);
@@ -64,7 +64,8 @@ class StudentController extends Controller
 
         return view('student.edit', [
             "tittle" => "Edit-data",
-            "student" => $student
+            "student" => $student,
+            "kelas" =>Kelas::all()
             
         ]);
         
@@ -74,7 +75,7 @@ class StudentController extends Controller
         $validateData = $request->validate([
             'nis' => 'required|max:255',
             'nama' => 'required',
-            'kelas' => 'required',
+            'kelas_id' => 'required',
             'alamat' => 'required',
             'tgl_lahir' => 'required',
         ]);

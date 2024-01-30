@@ -3,6 +3,7 @@
 use App\Http\Controllers\EkstracurriculersController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Students;
 
@@ -44,7 +45,17 @@ Route::group(["prefix"=>"/student"],function(){
     Route::delete('/delete/{student}',[StudentController::class , 'destroy']);//hapus data
     Route::get('/edit/{student}',[StudentController::class , 'edit']);//edit view
     Route::post('/update/{student}',[StudentController::class , 'update']);//edit data
-
-    
 });
+
+
+Route::group(["prefix"=>"/grade"],function(){
+    Route::get('/',[KelasController::class , 'index']);//view
+    Route::get('/detail/{grade}', [KelasController::class, 'show']);//detail data
+    Route::get('/create',[KelasController::class , 'create']);//tambah data
+    Route::post('/add',[KelasController::class , 'store']);//tambah data
+    Route::delete('/delete/{grade}',[KelasController::class , 'destroy']);//hapus data
+    Route::get('/edit/{grade}',[KelasController::class , 'edit']);//edit view
+    Route::post('/update/{grade}',[KelasController::class , 'update']);//edit data
+});
+
 

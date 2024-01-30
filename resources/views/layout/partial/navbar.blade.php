@@ -16,6 +16,9 @@
                     <a class="nav-link text-light" href="/student">Student</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-light" href="/grade">Grades</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-light" href="/ekstracurriculer">Ekskul</a>
                 </li>
             </ul>
