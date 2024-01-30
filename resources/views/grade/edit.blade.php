@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Edit Data Student</h1>
+<h1>Edit Data Kelas</h1>
 
 <form method="post" action="/grade/update/{{$grades->id}}">
   @csrf

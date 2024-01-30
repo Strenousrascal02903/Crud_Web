@@ -18,7 +18,7 @@
   </div>
   <div class="mb-3">
     <label for="kelas" class a="form-label">Kelas</label>
-    <input type="text" class="form-control" id="kelas" value="{{ $student->kelas }}" disabled>
+    <input type="text" class="form-control" id="kelas" value="{{ $student->kelas->nama }}" disabled>
   </div>
   <div class="mb-3">
     <label for="alamat" class="form-label">Alamat</label>

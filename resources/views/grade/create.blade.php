@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>New Data Student</h1>
+<h1>New Data Kelas</h1>
 
 <form method="post" action="/grade/add">
   @csrf
