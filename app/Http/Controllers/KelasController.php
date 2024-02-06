@@ -52,7 +52,9 @@ class KelasController extends Controller
 
         return view('grade.edit', [
             "tittle" => "Edit-data",
-            "grades" => $grade
+            "grades" => $grade,
+            "kelas" => Kelas::all()
+            
             
         ]);
         

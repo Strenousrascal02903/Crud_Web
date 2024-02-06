@@ -4,6 +4,8 @@ use App\Http\Controllers\EkstracurriculersController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Students;
 
@@ -34,6 +36,8 @@ Route::get('/about', function () {
     'foto' => 'images/gambar.jpg']);
 });
 
+Route::get('/login',[LoginController::class,'index']);
+Route::get('/register',[RegisterController::class,'index']);
 
 Route::get('/ekstracurriculer', [EkstracurriculersController::class, 'ekstra']);
 

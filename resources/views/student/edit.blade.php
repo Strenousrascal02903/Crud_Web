@@ -16,9 +16,12 @@
   </div>
 <div class="mb-3">
     <label for="kelas" class a="form-label">Kelas</label>
-    <select  name="kelas_id" class="form-control"  >
+    <select  name="kelas_id" class="form-select"  >
       @foreach ($kelas as $grade)
-      <option name="kelas_id" value="{{ $grade->id }}" {{$grade->id == $student->kelas_id ? "selected" : ""}}>{{$grade->nama}}</option>
+      @if(old('kelas_id',$student->kelas_id == $grade->id))
+      <option name="kelas_id" value="{{ $grade->id }}" selected>{{$grade->nama}}</option>
+      @endif
+      <option name="kelas_id" value="{{ $grade->id }}" >{{$grade->nama}}</option>
       @endforeach
     </select>
   </div>

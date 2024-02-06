@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-light " aria-current="page" href="/home">Home</a>
+                    <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/about">About Me</a>
@@ -19,13 +19,13 @@
                     <a class="nav-link text-light" href="/grade">Grades</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/ekstracurriculer">Ekskul</a>
+                    <a class="nav-link text-light" href="/ekstracurricular">Ekskul</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+           
+          
+                <a class="btn btn-secondary" href="/login" type="submit">Login</a>
+         
         </div>
     </div>
 </nav>
