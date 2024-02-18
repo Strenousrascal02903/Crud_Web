@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-info">
+<nav class="navbar navbar-expand-lg bg-dark bg-gradient ">
     <div class="container-fluid">
-        <a class="navbar-brand text-light" href="/home">Navbar</a>
+       
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,23 +9,44 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" aria-current="page" href="/home">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/about">About Me</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/student">Student</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/grade">Grades</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/ekstracurricular">Ekskul</a>
-                </li>
+               
             </ul>
-           
+            <div class="navbar-nav ms-auto">
+       
+
+        @auth
+          <li c`lass="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hi, {{ auth()->user()->name ?? "ah" }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a href="/dashboard/student" class="dropdown-item ">Dashboard</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form method="post" action="/logout">
+                  @csrf
+                  <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>`
+        @else
+          <a class="nav-link text-light" href="/login">Login</a>
+          <a class="nav-link text-light" href="/register">Register</a>
+        @endauth
+
+      </div>
+
           
-                <a class="btn btn-secondary" href="/login" type="submit">Login</a>
-         
         </div>
     </div>
 </nav>

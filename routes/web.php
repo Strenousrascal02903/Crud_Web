@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EkstracurriculersController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\StudentController;
@@ -36,8 +37,12 @@ Route::get('/about', function () {
     'foto' => 'images/gambar.jpg']);
 });
 
-Route::get('/login',[LoginController::class,'index']);
-Route::get('/register',[RegisterController::class,'index']);
+Route::get('/login',[LoginController::class,'index'])->name('login')->middleware('guest');
+Route::post('/login',[LoginController::class,'auth']);
+Route::post('/logout',[LoginController::class,'logout']);
+
+Route::get('/register',[RegisterController::class,'index'])->middleware('guest');
+Route::post('/register',[RegisterController::class,'store']);
 
 Route::get('/ekstracurriculer', [EkstracurriculersController::class, 'ekstra']);
 
@@ -50,8 +55,6 @@ Route::group(["prefix"=>"/student"],function(){
     Route::get('/edit/{student}',[StudentController::class , 'edit']);//edit view
     Route::post('/update/{student}',[StudentController::class , 'update']);//edit data
 });
-
-
 Route::group(["prefix"=>"/grade"],function(){
     Route::get('/',[KelasController::class , 'index']);//view
     Route::get('/detail/{grade}', [KelasController::class, 'show']);//detail data
@@ -62,4 +65,22 @@ Route::group(["prefix"=>"/grade"],function(){
     Route::post('/update/{grade}',[KelasController::class , 'update']);//edit data
 });
 
+Route::group(['prefix' => "/dashboard"], function(){
+   
+    Route::get('/student', [dashboardController::class, "index"])->middleware('auth');
+    Route::get('/student/detail/{student}', [dashboardController::class, "show"])->middleware('auth');
+ 
+    Route::get('/create', [dashboardController::class, "create"])->middleware('auth');
+    Route::post('/add', [dashboardController::class, "store"])->middleware('auth');
+    Route::delete('/delete/{student}',[dashboardController::class,"destroy"])->middleware('auth');
+    Route::get('/student/edit/{student}', [dashboardController::class, "edit"])->middleware('auth');
+    Route::post('/update/{student}', [dashboardController::class, "update"])->middleware('auth');
 
+
+    Route::get('/kelas', [dashboardController::class, "indexKelas"])->middleware('auth');
+    Route::get('/tambahKelas', [dashboardController::class, "createKelas"])->middleware('auth');
+    Route::post('/addKelas', [dashboardController::class, "storeKelas"])->middleware('auth');
+    Route::delete('/deleteKelas/{kelas}',[dashboardController::class,"destroyKelas"])->middleware('auth');
+    Route::get('/editKelas/{kelas}', [dashboardController::class, "editKelas"])->middleware('auth');
+    Route::post('/updateKelas/{kelas}', [dashboardController::class, "updateKelas"])->middleware('auth');
+});
