@@ -8,14 +8,60 @@ use Illuminate\Http\Request;
 
 class dashboardController extends Controller
 {
-    public function index() 
-   {
-
-        return view('dashboard/student/all', [
-            "tittle" => "Dashboard",
-            "students" => Student::all()
-        ]);
+  public function index(Request $request)
+  {
+    
+      $isFilterByNameChecked = session('filterByName', false);
+  
+      if ($isFilterByNameChecked) {
+          $students = Student::orderBy('nama', 'asc')->paginate(10);
+      } else {
+          $students = Student::inRandomOrder()->paginate(10);
+      }
+  
+      return view('dashboard/student/all', [
+          "tittle" => "Dashboard",
+          "students" => $students,
+          'isFilterByNameChecked' => $isFilterByNameChecked
+      ]);
   }
+  public function search(Request $request)
+{
+    $search = $request->input('search');
+
+    $students = Student::where('nama', 'like', '%'.$search.'%')
+                        ->orWhere('nis', 'like', '%'.$search.'%')
+                        ->orWhereHas('kelas', function($query) use ($search) {
+                            $query->where('nama', 'like', '%'.$search.'%');
+                        })
+                        ->paginate(10);
+                        if ($students->isEmpty()) {
+                          session()->flash('not_found', 'Data tidak ditemukan.');
+                          // Kode untuk mengembalikan data acak lagi dan mengosongkan form pencarian
+                          $students = Student::inRandomOrder()->paginate(10);
+                          return redirect()->back()->withInput()->with(['students' => $students]);
+                      }
+                      
+    return view('dashboard/student/all', [
+        "tittle" => "Dashboard",
+        'students' => $students,
+        'isFilterByNameChecked' => false, // Atau sesuaikan dengan kondisi Anda
+    ]);
+}
+
+  
+  public function filterByName(Request $request) 
+  {
+      
+      if ($request->has('filterByName')) {
+          session(['filterByName' => true]);
+      } else {
+          session()->forget('filterByName');
+      }
+  
+      return redirect('/dashboard/student');
+  }
+
   public function show(Student $student)
   {
       return view('dashboard.student.detail', [
@@ -89,17 +135,39 @@ if ($result) {
 } 
 
 }
-
-public function indexKelas() 
+public function indexKelas(Request $request)
 {
- 
-     return view('/dashboard/grade/all', [
-         "tittle" => "kelas",
-         "grades" => kelas::all()
-         
-     ]);
- 
+    // Mendapatkan status filter dari session
+    $isFilterByNameChecked = session('filterKelasByName', false);
+
+    // Jika filter dipilih, urutkan kelas berdasarkan nama; jika tidak, urutkan secara acak
+    if ($isFilterByNameChecked) {
+        $grades = kelas::orderBy('nama', 'asc')->paginate(10);
+    } else {
+        $grades = kelas::inRandomOrder()->paginate(10);
+    }
+    
+
+    return view('/dashboard/grade/all', [
+        "tittle" => "kelas",
+        "grades" => $grades,
+        'isFilterByNameChecked' => $isFilterByNameChecked
+    ]);
 }
+
+public function filterKelasByName(Request $request) 
+{
+    // Mengatur status filter berdasarkan checkbox
+    if ($request->has('filterByName')) {
+        session(['filterKelasByName' => true]);
+    } else {
+        session()->forget('filterKelasByName');
+    }
+
+    // Mengarahkan kembali ke halaman indeks
+    return redirect('/dashboard/kelas');
+}
+
 
 
 public function createKelas(kelas $class) 

@@ -6,6 +6,12 @@ $no = 1
 @section('conten')
 
 <h2>Selamat datang , {{ auth()->user()->name}}</h2>
+<form action="/dashboard/search" method="GET">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="search" aria-describedby="basic-addon2" id="search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
 
 <h3>Data Siswa</h3>
 <a type="button" class="btn btn-primary m-2 " href="/dashboard/create">Add new data</a>
@@ -20,7 +26,13 @@ $no = 1
             {{ session('success') }}
         </div>
     @endif
+    @if(session()->has('not_found'))
+    <div class="alert alert-warning col-lg-12" role="alert">
+        {{ session('not_found') }}
+    </div>
+@endif
 
+   
 <table class="table table-striped table-dark">
   <thead>
     <tr>
@@ -56,5 +68,14 @@ $no = 1
          @endforeach 
   </tbody>
 </table>
+
+<div class="d-flex justify-content-md-center ">
+    @for ($i = 1; $i <= $students->lastPage(); $i++)
+        <a href="{{ $students->url($i) }}" class="btn btn-primary @if ($students->currentPage() === $i) active @endif mx-1">{{ $i }}</a>
+    @endfor
+</div>
+
+
+
 @endsection
 

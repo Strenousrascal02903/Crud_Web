@@ -76,8 +76,13 @@ Route::group(['prefix' => "/dashboard"], function(){
     Route::get('/student/edit/{student}', [dashboardController::class, "edit"])->middleware('auth');
     Route::post('/update/{student}', [dashboardController::class, "update"])->middleware('auth');
 
+    Route::get('/filter', [dashboardController::class, "filterByName"])->middleware('auth');
+    Route::get('/search', [dashboardController::class, "search"])->middleware('auth');
+
+    
 
     Route::get('/kelas', [dashboardController::class, "indexKelas"])->middleware('auth');
+    Route::get('/filterKelas', [dashboardController::class, "filterKelasByName"])->middleware('auth');
     Route::get('/tambahKelas', [dashboardController::class, "createKelas"])->middleware('auth');
     Route::post('/addKelas', [dashboardController::class, "storeKelas"])->middleware('auth');
     Route::delete('/deleteKelas/{kelas}',[dashboardController::class,"destroyKelas"])->middleware('auth');

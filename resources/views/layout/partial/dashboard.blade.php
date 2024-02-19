@@ -58,11 +58,24 @@
                 </a>
               </li>
               <li>
-                <a href="/dashboard/kelas" class="nav-link text-white <?php echo ($_SERVER['REQUEST_URI'] == '/dashboard/kelas') ? 'active' : ''; ?>">
+                <a href="/dashboard/kelas" class="nav-link mb-4 text-white <?php echo ($_SERVER['REQUEST_URI'] == '/dashboard/kelas') ? 'active' : ''; ?>" >
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                   Grade
                 </a>
               </li>
+              <form action="/dashboard/filter" method="GET">
+                <h5>Filter</h5>
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="filterByName" value="true" id="filterByName"  {{ $isFilterByNameChecked ? 'checked' : '' }}>
+
+                     <label class="form-check-label" for="filterByName" >
+                       Filter Student by Name
+                     </label>
+                 </div>
+    <!-- Anda dapat menambahkan lebih banyak opsi filter di sini -->
+                <button type="submit" class="btn btn-primary mt-3">Filter</button>
+              </form>
+
             </ul>
             <hr>
           </div>
