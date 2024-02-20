@@ -22,7 +22,7 @@ use App\Models\Students;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home' , ['nama' => 'HomePage', 'tittle' => 'HomePage']);
 });
 
 Route::get('/home', function () {
@@ -69,7 +69,6 @@ Route::group(['prefix' => "/dashboard"], function(){
    
     Route::get('/student', [dashboardController::class, "index"])->middleware('auth');
     Route::get('/student/detail/{student}', [dashboardController::class, "show"])->middleware('auth');
- 
     Route::get('/create', [dashboardController::class, "create"])->middleware('auth');
     Route::post('/add', [dashboardController::class, "store"])->middleware('auth');
     Route::delete('/delete/{student}',[dashboardController::class,"destroy"])->middleware('auth');
@@ -78,8 +77,6 @@ Route::group(['prefix' => "/dashboard"], function(){
 
     Route::get('/filter', [dashboardController::class, "filterByName"])->middleware('auth');
     Route::get('/search', [dashboardController::class, "search"])->middleware('auth');
-
-    
 
     Route::get('/kelas', [dashboardController::class, "indexKelas"])->middleware('auth');
     Route::get('/filterKelas', [dashboardController::class, "filterKelasByName"])->middleware('auth');

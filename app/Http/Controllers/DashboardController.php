@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class dashboardController extends Controller
 {
-  public function index(Request $request)
+  public function index()
   {
     
       $isFilterByNameChecked = session('filterByName', false);
@@ -16,7 +16,7 @@ class dashboardController extends Controller
       if ($isFilterByNameChecked) {
           $students = Student::orderBy('nama', 'asc')->paginate(10);
       } else {
-          $students = Student::inRandomOrder()->paginate(10);
+          $students = Student::orderBy('id','asc')->paginate(10);
       }
   
       return view('dashboard/student/all', [
@@ -37,7 +37,7 @@ class dashboardController extends Controller
                         ->paginate(10);
                         if ($students->isEmpty()) {
                           session()->flash('not_found', 'Data tidak ditemukan.');
-                          // Kode untuk mengembalikan data acak lagi dan mengosongkan form pencarian
+                        
                           $students = Student::inRandomOrder()->paginate(10);
                           return redirect()->back()->withInput()->with(['students' => $students]);
                       }
@@ -111,7 +111,7 @@ public function destroy(Student $student)
 public function edit(Student $student)  
   {
     return view('dashboard.student.edit', [
-      "tittle" => "Ediy-students",
+      "tittle" => "Edit-students",
       "student" => $student,
       "grades" => kelas::all(),
     ]);

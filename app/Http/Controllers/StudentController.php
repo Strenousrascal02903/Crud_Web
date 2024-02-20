@@ -10,9 +10,10 @@ class StudentController extends Controller
 {
     public function index()
     {
+        $students = Student::inRandomOrder()->paginate(10);
          return view('student/all',[
             "tittle" => "student",
-            "students" => Student::all()
+            "students" => $students
         ]);
     }
 

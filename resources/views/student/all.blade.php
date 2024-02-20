@@ -53,4 +53,10 @@ $no = 1
          @endforeach 
   </tbody>
 </table>
+<div class="d-flex justify-content-md-center ">
+    @for ($i = 1; $i <= $students->lastPage(); $i++)
+        <a href="{{ $students->url($i) }}" class="btn btn-primary @if ($students->currentPage() === $i) active @endif mx-1">{{ $i }}</a>
+    @endfor
+</div>
+
 @endsection
